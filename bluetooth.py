@@ -2,7 +2,7 @@ import serial
 import time
 
 print("Start")
-port="/dev/tty.HC-06-DevB" #This will be different for various devices and on windows it will probably be a COM port.
+port="COM4" #This will be different for various devices and on windows it will probably be a COM port.
 bluetooth=serial.Serial(port, 9600)#Start communications with the bluetooth unit
 print("Connected")
 bluetooth.flushInput() #This gives the bluetooth a little kick
