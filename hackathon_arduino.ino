@@ -2,6 +2,12 @@
 
 AF_DCMotor left_motor(1);
 
+/*
+motor.run(FORWARD/BACKWARD/RELEASE)
+motor.setSpeed(0-255) corresponds to 0-5V
+*/
+
+
 void setup() {
   // put your setup code here, to run once:
 }
