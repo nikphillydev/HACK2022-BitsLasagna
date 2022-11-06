@@ -50,6 +50,7 @@ def on_press(key):
         print('special key {0} pressed.'.format(key))
 
 def on_release(key):
+    bluetooth.write(b'z')
     if key == keyboard.Key.esc:
         # Stop listener
         return False

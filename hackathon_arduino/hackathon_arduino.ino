@@ -10,7 +10,8 @@ int midPos = 103;
 
 void setup() {
   HC06.begin(9600);
-  turnServo.attach(10);
+  turnServo.attach(9);
+  turnServo.write(midPos);
 }
 
 void loop() {
@@ -34,12 +35,16 @@ void loop() {
     if (receive == 'e') {
       turnRightForward();
     }
+    if (receive == 'z') {
+      kill();
+    }
   }
 }
 
 void kill() {
   leftMotor.run(RELEASE);
   rightMotor.run(RELEASE);
+  turnServo.write(midPos);
 }
 
 void backward() {
@@ -47,7 +52,7 @@ void backward() {
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(FORWARD);
-  leftMotor.run(BACKWARD);
+  leftMotor.run(FORWARD);
 }
 
 void forward() {
@@ -55,7 +60,7 @@ void forward() {
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(BACKWARD);
-  leftMotor.run(FORWARD);
+  leftMotor.run(BACKWARD);
 }
 
 void turnRightForward() {
@@ -63,14 +68,14 @@ void turnRightForward() {
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(BACKWARD);
-  leftMotor.run(FORWARD);
+  leftMotor.run(BACKWARD);
 }
  void turnRightBackward() {
   turnServo.write(midPos-45);
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(FORWARD);
-  leftMotor.run(BACKWARD);
+  leftMotor.run(FORWARD);
  }
 
 void turnLeftForward() {
@@ -78,13 +83,13 @@ void turnLeftForward() {
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(BACKWARD);
-  leftMotor.run(FORWARD);
+  leftMotor.run(BACKWARD);
 }
 
 void turnLeftBackward() {
   turnServo.write(midPos+45);
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
-  rightMotor.run(BACKWARD);
+  rightMotor.run(FORWARD);
   leftMotor.run(FORWARD);
 }
