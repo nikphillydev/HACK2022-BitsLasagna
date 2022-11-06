@@ -42,11 +42,14 @@ def on_press(key):
             bluetooth.write(b's')
         elif key.char == "d":
             bluetooth.write(b'd')
+        elif key.char == "q":
+            bluetooth.write(b'q')
+        elif key.char == "e":
+            bluetooth.write(b'e')
     except AttributeError:
         print('special key {0} pressed.'.format(key))
 
 def on_release(key):
-    bluetooth.write(b'q')
     if key == keyboard.Key.esc:
         # Stop listener
         return False

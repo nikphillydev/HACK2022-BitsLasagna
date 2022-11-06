@@ -1,39 +1,38 @@
 #include <AFMotor.h>
 #include <SoftwareSerial.h>
+#include <Servo.h>
 
 SoftwareSerial HC06(10, 11);
-AF_DCMotor leftMotor(1);
-AF_DCMotor rightMotor(2);
-
-/*
-motor.run(FORWARD/BACKWARD/RELEASE)
-motor.setSpeed(0-255) corresponds to 0-5V
-*/
-
+AF_DCMotor leftMotor(3);
+AF_DCMotor rightMotor(4);
+Servo turnServo;
+int midPos = 103;
 
 void setup() {
-  // put your setup code here, to run once:
   HC06.begin(9600);
+  turnServo.attach(10);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   if (HC06.available() > 0) {
     char receive = HC06.read();
     if (receive == 'w') {
       forward();
     }
     if (receive == 'a') {
-      turnLeft();
+      turnLeftBackward();
     }
     if (receive == 's') {
       backward();
     }
     if (receive == 'd') {
-      turnRight();
+      turnRightBackward();
     }
     if (receive == 'q') {
-      kill();
+      turnLeftForward();
+    }
+    if (receive == 'e') {
+      turnRightForward();
     }
   }
 }
@@ -43,44 +42,49 @@ void kill() {
   rightMotor.run(RELEASE);
 }
 
-void forward() {
-  // leftMotor.run(RELEASE);
-  // rightMotor.run(RELEASE);
+void backward() {
+  turnServo.write(midPos);
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(FORWARD);
   leftMotor.run(BACKWARD);
-  // delay(100);
-  // leftMotor.run(RELEASE);
-  // rightMotor.run(RELEASE);
 }
 
-void backward() {
-  // leftMotor.run(RELEASE);
-  // rightMotor.run(RELEASE);
+void forward() {
+  turnServo.write(midPos);
   leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(BACKWARD);
   leftMotor.run(FORWARD);
-  // delay(100);
-  // leftMotor.run(RELEASE);
-  // rightMotor.run(RELEASE);
 }
 
-void turnRight() {
-  // leftMotor.run(RELEASE);
-  // rightMotor.run(RELEASE);
+void turnRightForward() {
+  turnServo.write(midPos-45);
   leftMotor.setSpeed(255);
-  leftMotor.run(BACKWARD);
-  // delay(100);
-  // leftMotor.run(RELEASE);
+  rightMotor.setSpeed(255);
+  rightMotor.run(BACKWARD);
+  leftMotor.run(FORWARD);
 }
-
-void turnLeft() {
-  // leftMotor.run(RELEASE);
-  // rightMotor.run(RELEASE);
+ void turnRightBackward() {
+  turnServo.write(midPos-45);
+  leftMotor.setSpeed(255);
   rightMotor.setSpeed(255);
   rightMotor.run(FORWARD);
-  // delay(100);
-  // rightMotor.run(RELEASE);
+  leftMotor.run(BACKWARD);
+ }
+
+void turnLeftForward() {
+  turnServo.write(midPos+45);
+  leftMotor.setSpeed(255);
+  rightMotor.setSpeed(255);
+  rightMotor.run(BACKWARD);
+  leftMotor.run(FORWARD);
+}
+
+void turnLeftBackward() {
+  turnServo.write(midPos+45);
+  leftMotor.setSpeed(255);
+  rightMotor.setSpeed(255);
+  rightMotor.run(BACKWARD);
+  leftMotor.run(FORWARD);
 }
