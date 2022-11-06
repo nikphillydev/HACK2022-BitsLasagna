@@ -32,39 +32,55 @@ void loop() {
     if (receive == 'd') {
       turnRight();
     }
+    if (receive == 'q') {
+      kill();
+    }
   }
 }
 
+void kill() {
+  leftMotor.run(RELEASE);
+  rightMotor.run(RELEASE);
+}
+
 void forward() {
-leftMotor.setSpeed(255);
-rightMotor.setSpeed(255);
-rightMotor.run(FORWARD);
-leftMotor.run(BACKWARD);
-delay(500);
-leftMotor.run(RELEASE);
-rightMotor.run(RELEASE);
+  // leftMotor.run(RELEASE);
+  // rightMotor.run(RELEASE);
+  leftMotor.setSpeed(255);
+  rightMotor.setSpeed(255);
+  rightMotor.run(FORWARD);
+  leftMotor.run(BACKWARD);
+  // delay(100);
+  // leftMotor.run(RELEASE);
+  // rightMotor.run(RELEASE);
 }
 
 void backward() {
-leftMotor.setSpeed(255);
-rightMotor.setSpeed(255);
-rightMotor.run(BACKWARD);
-leftMotor.run(FORWARD);
-delay(500);
-leftMotor.run(RELEASE);
-rightMotor.run(RELEASE);
+  // leftMotor.run(RELEASE);
+  // rightMotor.run(RELEASE);
+  leftMotor.setSpeed(255);
+  rightMotor.setSpeed(255);
+  rightMotor.run(BACKWARD);
+  leftMotor.run(FORWARD);
+  // delay(100);
+  // leftMotor.run(RELEASE);
+  // rightMotor.run(RELEASE);
 }
 
 void turnRight() {
-leftMotor.setSpeed(255);
-leftMotor.run(BACKWARD);
-delay(500);
-leftMotor.run(RELEASE);
+  // leftMotor.run(RELEASE);
+  // rightMotor.run(RELEASE);
+  leftMotor.setSpeed(255);
+  leftMotor.run(BACKWARD);
+  // delay(100);
+  // leftMotor.run(RELEASE);
 }
 
 void turnLeft() {
-rightMotor.setSpeed(255);
-rightMotor.run(FORWARD);
-delay(500);
-rightMotor.run(RELEASE);
+  // leftMotor.run(RELEASE);
+  // rightMotor.run(RELEASE);
+  rightMotor.setSpeed(255);
+  rightMotor.run(FORWARD);
+  // delay(100);
+  // rightMotor.run(RELEASE);
 }
