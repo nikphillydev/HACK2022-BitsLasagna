@@ -8,7 +8,7 @@ AF_DCMotor rightMotor(4);
 AF_DCMotor frontLights(1);
 AF_DCMotor backLights(2);
 Servo turnServo;
-int midPos = 103;
+int midPos = 97;
 
 void setup() {
   HC06.begin(9600);
@@ -17,6 +17,7 @@ void setup() {
 }
 
 void loop() {
+  
   if (HC06.available() > 0) {
     char receive = HC06.read();
     if (receive == 'w') {
